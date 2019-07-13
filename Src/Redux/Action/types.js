@@ -20,3 +20,50 @@ export const TOGGLE_STYLE = "TOGGLE_STYLE";
 
 //Toggle Drawer
 export const TOGGLE_DRAWER = "TOGGLE_DRAWER";
+
+//Toggle CreateRewards
+export const TOGGLE_CREATE_REWARD_VIEW = "TOGGLE_CREATE_REWARD_VIEW";
+
+//Create Rewards
+export const CREATE_REWARD = "CREATE_REWARD";
+
+//Create Habit
+export const CREATE_HABIT = "CREATE_HABIT";
+export const NEW_HABITS = "NEW_HABITS";
+
+// Toggle menu on habit card
+export const TOGGLE_DAY_MENU = "TOGGLE_DAY_MENU";
+
+//Marked date Done
+export const MARK_DATE_DONE = "MARK_DATE_DONE";
+
+//Mark date Fail
+export const MARK_DATE_FAIL = "MARK_DATE_FAIL";
+
+//Mark date SKIP
+export const MARK_DATE_SKIP = "MARK_DATE_SKIP";
+
+//Mark date Fail
+export const MARK_DATE_DELETE = "MARK_DATE_DELETE";
+
+//Habit value to Habit Insider
+export const HABIT_INSIDER_VALUE = "HABIT_INSIDER_VALUE";
+
+// Toggle Card Info on habit card
+export const TOGGLE_CARD_INFO = "TOGGLE_CARD_INFO";
+
+// DAYS OFF HABIT SCH
+export const DAYS_OFF = "DAYS_OFF";
+export const CHANGE_COLOR_DAYS_OFF = "CHANGE_COLOR_DAYS_OFF";
+
+//Flexible HABIT SCH
+export const FLEXIBLE_SCH = "FLEXIBLE_SCH";
+
+// Repeating HABIT SCH
+export const REPEATING_SCH = "REPEATING_SCH";
+
+// Habit Insider Show Overlay
+export const SHOW_HABIT_INSIDER_OVERLAY = "SHOW_HABIT_INSIDER_OVERLAY";
+
+// Create Target
+export const CREATE_TARGET = "CREATE_TARGET";

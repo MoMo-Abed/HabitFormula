@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Icon, Fab } from "native-base";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { ToggleRewardsView } from "../../../Redux/Action/MainActions";
+import { ToggleRewardsView } from "../../../../Redux/Action/MainActions";
 import { Actions } from "react-native-router-flux";
+import { ShowInsiderOverLay } from "../../../../Redux/Action/HB_Habits_Actions";
 export class FabBtnView extends Component {
   state = {
     active: false
@@ -22,7 +23,7 @@ export class FabBtnView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#238787";
+        return "#0A090C";
       case "candy":
         return "#F24236";
       case "blue":
@@ -40,43 +41,12 @@ export class FabBtnView extends Component {
         direction="up"
         style={{ backgroundColor: this.ToggleFabBtnColor() }}
         position="bottomRight"
-        onPress={() => this.setState({ active: !this.state.active })}
+        onPress={() => {
+          this.setState({ active: !this.state.active });
+          this.props.ShowInsiderOverLay();
+        }}
       >
         <AntDesign name={active ? "close" : "plus"} />
-        <Button
-          onPress={() => {
-            Actions.CreateHabit(),
-              this.setState({ active: !this.state.active });
-          }}
-          style={{ backgroundColor: this.ToggleFabBtnColor() }}
-        >
-          <Text style={[styles.BtnText, { opacity: active ? 1 : 0 }]}>
-            Add Habit
-          </Text>
-          <AntDesign
-            style={{ position: "absolute" }}
-            name="plus"
-            color="white"
-            size={20}
-          />
-        </Button>
-        <Button
-          onPress={() => {
-            this.props.ToggleRewardsView(),
-              this.setState({ active: !this.state.active });
-          }}
-          style={{ backgroundColor: this.ToggleFabBtnColor() }}
-        >
-          <Text style={[styles.BtnText, { opacity: active ? 1 : 0 }]}>
-            Add Reward
-          </Text>
-          <AntDesign
-            style={{ position: "absolute" }}
-            color="white"
-            size={20}
-            name="plus"
-          />
-        </Button>
       </Fab>
     );
   }
@@ -101,5 +71,5 @@ const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  { ToggleRewardsView }
+  { ShowInsiderOverLay }
 )(FabBtnView);

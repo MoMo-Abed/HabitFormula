@@ -14,11 +14,11 @@ import {
   Container
 } from "native-base";
 import Entypo from "react-native-vector-icons/Entypo";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { Actions } from "react-native-router-flux";
 
-import HeaderRightPopMenu from "./HeaderRightPopMenu";
-import { ToggleDrawer } from "../../../Redux/Action/MainActions";
-import RewardsSwipeView from "./Reward/RewardsSwipeView";
-import HabitsVMainView from "./HabitCardComponents/HabitsVMainView";
+import CreateHabitTab from "./CreateHabitTab";
+import CreateReminderTab from "./CreateReminderTab";
 export class HeaderMainView extends Component {
   static propTypes = {
     ChangStyle: PropTypes.string.isRequired,
@@ -51,7 +51,7 @@ export class HeaderMainView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#282729";
+        return "#0A090C";
       case "candy":
         return "#F24236";
       case "blue":
@@ -63,82 +63,41 @@ export class HeaderMainView extends Component {
     }
   }
 
-  //
-  ToggleContainerColor() {
-    let toggle = this.props.ChangeStyle;
-
-    switch (toggle) {
-      case "dark":
-        return "#363538";
-      case "candy":
-      case "blue":
-      case "pop":
-        return "white";
-
-      default:
-        return null;
-    }
-  }
-
   render() {
     return (
-      <Container style={{ backgroundColor: this.ToggleContainerColor() }}>
+      <Container>
         <Header
           style={{ backgroundColor: this.ToggleHeaderColor() }}
           androidStatusBarColor={this.ToggleStatusColor()}
           hasTabs
         >
           <Left>
-            <Button onPress={() => this.props.ToggleDrawer()} transparent>
-              <Entypo name="menu" size={25} color="white" />
+            <Button onPress={() => Actions.MainView()} transparent>
+              <AntDesign name="arrowleft" size={25} color="white" />
             </Button>
           </Left>
           <Body>
-            <Title>Habits</Title>
+            <Title>HabitFormula</Title>
           </Body>
           <Right>
-            <Button transparent>
-              <Entypo name="cloud" size={25} color="white" />
+            <Button onPress={() => Actions.MainView()} transparent>
+              <Text style={{ color: "white" }}>Cancel</Text>
             </Button>
 
             <Button transparent>
-              <HeaderRightPopMenu />
+              <Text style={{ color: "white" }}>Save</Text>
             </Button>
           </Right>
         </Header>
-
-        <Tabs
-          tabContainerStyle={{
-            backgroundColor: this.ToggleHeaderColor(),
-            height: 20,
-            paddingBottom: 5
-          }}
-          tabBarUnderlineStyle={{ backgroundColor: "white" }}
-        >
+        <Tabs tabContainerStyle={{ backgroundColor: "red" }}>
           <Tab
-            textStyle={{ marginLeft: -60, fontSize: 12 }}
             tabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            activeTabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            heading="Rewards"
+            heading="Tab1"
           >
-            <RewardsSwipeView />
+            <CreateHabitTab />
           </Tab>
-          <Tab
-            textStyle={{ fontSize: 12 }}
-            tabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            activeTabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            heading="Habits"
-          >
-            <HabitsVMainView />
-          </Tab>
-
-          <Tab
-            textStyle={{ marginRight: -60, fontSize: 12 }}
-            tabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            activeTabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            heading="Graphs"
-          >
-            <Text>gg</Text>
+          <Tab heading="Tab2">
+            <CreateReminderTab />
           </Tab>
         </Tabs>
       </Container>
@@ -154,5 +113,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { ToggleDrawer }
+  {}
 )(HeaderMainView);

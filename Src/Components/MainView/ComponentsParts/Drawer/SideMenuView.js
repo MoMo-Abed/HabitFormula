@@ -18,7 +18,7 @@ export class SideMenuView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#363538";
       case "candy":
         return "#F24236";
       case "blue":
@@ -37,13 +37,13 @@ export class SideMenuView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#363538";
       case "candy":
         return "white";
       case "blue":
-        return "#117ACA";
+        return "white";
       case "pop":
-        return "#8852CE";
+        return "white";
       default:
         return null;
     }
@@ -65,14 +65,8 @@ export class SideMenuView extends Component {
             cultivating habits.”{" "}
           </Text>
         </View>
-        <SideMenuRowItems IconName="heart" Title="Habit" />
-        <SideMenuRowItems IconName="pluscircle" Title="Categories" />
-        <SideMenuRowItems
-          IconName="layout"
-          Title="Themes"
-          onPressBtn={() => Actions.themesView()}
-        />
-        <SideMenuRowItems IconName="setting" Title="Settings" />
+
+        <SideMenuRowItems />
       </View>
     );
   }

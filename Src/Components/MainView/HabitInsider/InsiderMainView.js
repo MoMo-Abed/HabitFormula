@@ -2,17 +2,27 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
-export class ThemesPageView extends Component {
+import {
+  Container,
+  Header,
+  Left,
+  Body,
+  Right,
+  Button,
+  Icon,
+  Title
+} from "native-base";
+import HeaderMainView from "./HeaderMainView";
+export class InsiderMainView extends Component {
   static propTypes = {
     prop: PropTypes
   };
 
   render() {
     return (
-      <View>
-        <Text> prop </Text>
-      </View>
+      <Container style={{ backgroundColor: "#C3C3C7" }}>
+        <HeaderMainView />
+      </Container>
     );
   }
 }
@@ -24,4 +34,4 @@ const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ThemesPageView);
+)(InsiderMainView);

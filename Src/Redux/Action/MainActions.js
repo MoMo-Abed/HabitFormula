@@ -1,4 +1,8 @@
-import { TOGGLE_STYLE, TOGGLE_DRAWER } from "./types";
+import {
+  TOGGLE_STYLE,
+  TOGGLE_DRAWER,
+  TOGGLE_CREATE_REWARD_VIEW
+} from "./types";
 
 export function ToggleTheme(state) {
   return {
@@ -10,5 +14,11 @@ export function ToggleTheme(state) {
 export function ToggleDrawer() {
   return {
     type: TOGGLE_DRAWER
+  };
+}
+
+export function ToggleRewardsView() {
+  return {
+    type: TOGGLE_CREATE_REWARD_VIEW
   };
 }

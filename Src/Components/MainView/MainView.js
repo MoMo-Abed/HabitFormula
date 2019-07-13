@@ -10,7 +10,9 @@ import {
   Right,
   Button,
   Icon,
-  Title
+  Title,
+  Tab,
+  Tabs
 } from "native-base";
 import Entypo from "react-native-vector-icons/Entypo";
 import { MenuProvider } from "react-native-popup-menu";
@@ -19,17 +21,21 @@ import SideMenu from "react-native-side-menu";
 import HeaderMainView from "./ComponentsParts/HeaderMainView";
 import SwipeView from "./ComponentsParts/SwipeView";
 import FabBtnView from "./ComponentsParts/FabBtnView";
-import SideMenuView from "./ComponentsParts/SideMenuView";
+import SideMenuView from "./ComponentsParts/Drawer/SideMenuView";
+import OverlayRewardsMenu from "./ComponentsParts/Reward/OverlayRewardsMenu";
+
 import { Drawer } from "native-base";
 export class MainView extends Component {
+    
+
   render() {
     let { DrawerState } = this.props;
     return (
       <MenuProvider>
         <Drawer open={DrawerState} content={<SideMenuView />}>
-          <Container>
+          <Container >
             <HeaderMainView />
-            <SwipeView />
+            <OverlayRewardsMenu />
             <FabBtnView />
           </Container>
         </Drawer>
@@ -39,7 +45,8 @@ export class MainView extends Component {
 }
 
 const mapStateToProps = state => ({
-  DrawerState: state.HBMain.DrawerState
+  DrawerState: state.HBMain.DrawerState,
+  ChangeStyle: state.HBMain.ChangeStyle
 });
 
 const mapDispatchToProps = {};

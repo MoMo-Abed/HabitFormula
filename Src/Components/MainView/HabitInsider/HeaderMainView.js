@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { View, Text } from "react-native";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import {
   Header,
@@ -14,25 +14,23 @@ import {
   Container
 } from "native-base";
 import Entypo from "react-native-vector-icons/Entypo";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { Actions } from "react-native-router-flux";
+import Agenda from "./Agenda";
+import Target from "./Target";
+import Details from "./Details";
 
-import HeaderRightPopMenu from "./HeaderRightPopMenu";
-import { ToggleDrawer } from "../../../Redux/Action/MainActions";
-import RewardsSwipeView from "./Reward/RewardsSwipeView";
-import HabitsVMainView from "./HabitCardComponents/HabitsVMainView";
 export class HeaderMainView extends Component {
   static propTypes = {
-    ChangStyle: PropTypes.string.isRequired,
-    ToggleDrawer: PropTypes.func.isRequired
+    prop: PropTypes
   };
-
-  //Toggle Status Bar Color in Theme Change
 
   ToggleStatusColor() {
     let toggle = this.props.ChangeStyle;
 
     switch (toggle) {
       case "dark":
-        return "#282729";
+        return "#0A090C";
       case "candy":
         return "#F24236";
       case "blue":
@@ -51,7 +49,7 @@ export class HeaderMainView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#282729";
+        return "#0A090C";
       case "candy":
         return "#F24236";
       case "blue":
@@ -63,50 +61,36 @@ export class HeaderMainView extends Component {
     }
   }
 
-  //
-  ToggleContainerColor() {
-    let toggle = this.props.ChangeStyle;
-
-    switch (toggle) {
-      case "dark":
-        return "#363538";
-      case "candy":
-      case "blue":
-      case "pop":
-        return "white";
-
-      default:
-        return null;
-    }
-  }
-
   render() {
     return (
-      <Container style={{ backgroundColor: this.ToggleContainerColor() }}>
+      <Container style={{ backgroundColor: "#C3C3C7" }}>
         <Header
           style={{ backgroundColor: this.ToggleHeaderColor() }}
           androidStatusBarColor={this.ToggleStatusColor()}
           hasTabs
         >
           <Left>
-            <Button onPress={() => this.props.ToggleDrawer()} transparent>
-              <Entypo name="menu" size={25} color="white" />
+            <Button onPress={() => Actions.MainView()} transparent>
+              <AntDesign name="arrowleft" size={25} color="white" />
             </Button>
           </Left>
           <Body>
-            <Title>Habits</Title>
+            <Title>{this.props.HabitInsider.HabitName || ""}</Title>
           </Body>
           <Right>
-            <Button transparent>
-              <Entypo name="cloud" size={25} color="white" />
+            <Button onPress={() => Actions.MainView()} transparent>
+              <AntDesign name="edit" size={25} color="white" />
             </Button>
 
             <Button transparent>
-              <HeaderRightPopMenu />
+              <AntDesign name="filetext1" size={25} color="white" />
+            </Button>
+
+            <Button transparent>
+              <AntDesign name="barschart" size={25} color="white" />
             </Button>
           </Right>
         </Header>
-
         <Tabs
           tabContainerStyle={{
             backgroundColor: this.ToggleHeaderColor(),
@@ -119,26 +103,26 @@ export class HeaderMainView extends Component {
             textStyle={{ marginLeft: -60, fontSize: 12 }}
             tabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
             activeTabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            heading="Rewards"
+            heading="TARGETS"
           >
-            <RewardsSwipeView />
+            <Target />
           </Tab>
           <Tab
             textStyle={{ fontSize: 12 }}
             tabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
             activeTabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            heading="Habits"
+            heading="DETAILS"
           >
-            <HabitsVMainView />
+            <Details />
           </Tab>
 
           <Tab
             textStyle={{ marginRight: -60, fontSize: 12 }}
             tabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
             activeTabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
-            heading="Graphs"
+            heading="CALENDAR"
           >
-            <Text>gg</Text>
+            <Agenda />
           </Tab>
         </Tabs>
       </Container>
@@ -146,13 +130,14 @@ export class HeaderMainView extends Component {
   }
 }
 
-const styles = StyleSheet.create({});
-
 const mapStateToProps = state => ({
-  ChangeStyle: state.HBMain.ChangeStyle
+  ChangeStyle: state.HBMain.ChangeStyle,
+  HabitInsider: state.HBHabits.HabitInsider
 });
+
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  { ToggleDrawer }
+  mapDispatchToProps
 )(HeaderMainView);
