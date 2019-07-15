@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Overlay from "react-native-modal-overlay";
@@ -41,9 +41,9 @@ export class OverlayRewardsMenu extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#282729";
       case "candy":
-        return "white";
+        return "#F24236";
       case "blue":
         return "#117ACA";
       case "pop":
@@ -60,11 +60,11 @@ export class OverlayRewardsMenu extends Component {
       case "dark":
         return "white";
       case "candy":
-        return "#F24236";
+        return "white";
       case "blue":
-        return "black";
+        return "white";
       case "pop":
-        return "#8852CE";
+        return "white";
       default:
         return null;
     }
@@ -91,7 +91,11 @@ export class OverlayRewardsMenu extends Component {
     if (ShowHabitInsiderOverLayRe) {
       return (
         <View style={[styles.MainView]}>
-          <View style={[styles.overlay, { height: "100%" }]} />
+          <TouchableWithoutFeedback
+            onPress={() => this.props.ShowInsiderOverLay()}
+          >
+            <View style={[styles.overlay, { height: "100%" }]} />
+          </TouchableWithoutFeedback>
           {console.log("work")}
           <Form
             style={[
@@ -104,7 +108,9 @@ export class OverlayRewardsMenu extends Component {
             </Text>
 
             <View style={styles.ReqPointsView}>
-              <Label style={{ marginTop: 15 }}>Target Days:</Label>
+              <Label style={{ marginTop: 15, color: this.ToggleColor() }}>
+                Target Days:
+              </Label>
               <Item
                 style={{ width: 50, borderBottomColor: this.ToggleColor() }}
               >
@@ -118,7 +124,9 @@ export class OverlayRewardsMenu extends Component {
                       }
                     })
                   }
-                  selectionColor="red"
+                  style={{ color: this.ToggleColor() }}
+                  selectionColor={this.ToggleColor()}
+                  placeholderTextColor={this.ToggleColor()}
                   keyboardType="number-pad"
                   placeholder="Days"
                 />
@@ -142,7 +150,9 @@ export class OverlayRewardsMenu extends Component {
                     }
                   })
                 }
-                selectionColor="red"
+                style={{ color: this.ToggleColor() }}
+                selectionColor={this.ToggleColor()}
+                placeholderTextColor={this.ToggleColor()}
                 placeholder="Reward"
               />
             </Item>
@@ -163,8 +173,9 @@ export class OverlayRewardsMenu extends Component {
                     }
                   })
                 }
-                style={{}}
-                selectionColor="red"
+                style={{ color: this.ToggleColor() }}
+                selectionColor={this.ToggleColor()}
+                placeholderTextColor={this.ToggleColor()}
                 placeholder="Description"
               />
             </Item>

@@ -20,12 +20,20 @@ import ArchivedForm from "./CreateHabitComponents/ArchivedForm";
 import ScheduleForm from "./CreateHabitComponents/ScheduleForm";
 import {
   ChangeColor,
-  CreateHabit
+  CreateHabit,
+  UpdateHabits
 } from "../../../Redux/Action/HB_Habits_Actions";
 import CreateReminderTab from "./CreateReminderTab";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Actions } from "react-native-router-flux";
 export class CreateHabitTab extends Component {
+  componentDidMount() {
+    if (this.props.UpdateRe) {
+      this.setState({
+        CreateHabitData: this.props.Habits[this.props.HabitInsider]
+      });
+    }
+  }
   state = {
     CreateHabitData: {
       HabitName: "",
@@ -66,7 +74,9 @@ export class CreateHabitTab extends Component {
       },
 
       StartDate: new Date(),
-      Archived: false
+      Archived: false,
+
+      HabitNumberOn: 0
     }
   };
   static propTypes = {
@@ -287,13 +297,18 @@ export class CreateHabitTab extends Component {
   }
 
   CreateHabit() {
-    this.setState({
-      CreateHabitData: {
-        ...this.state.CreateHabitData,
-        Reg: [this.state.CreateHabitData.Reason]
-      }
-    });
-    this.props.CreateHabit(this.state.CreateHabitData);
+    if (this.props.UpdateRe) {
+      let HabitsCopy = JSON.parse(JSON.stringify(this.props.Habits));
+      //make changes to ingredients
+      HabitsCopy[this.props.HabitInsider] = { ...this.state.CreateHabitData }; //whatever new inegredints are
+
+      this.setState({
+        Habits: HabitsCopy
+      });
+      this.props.UpdateHabits(HabitsCopy);
+    } else {
+      this.props.CreateHabit(this.state.CreateHabitData);
+    }
     Actions.MainView();
     this.setState({
       CreateHabitData: {
@@ -441,12 +456,15 @@ export class CreateHabitTab extends Component {
 }
 
 const mapStateToProps = state => ({
-  ChangeStyle: state.HBMain.ChangeStyle
+  ChangeStyle: state.HBMain.ChangeStyle,
+  HabitInsider: state.HBHabits.HabitInsider,
+  Habits: state.HBHabits.Habits,
+  UpdateRe: state.HBHabits.UpdateRe
 });
 
 const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  { ChangeColor, CreateHabit }
+  { ChangeColor, CreateHabit, UpdateHabits }
 )(CreateHabitTab);

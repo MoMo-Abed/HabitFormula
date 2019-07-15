@@ -34,17 +34,8 @@ export const NEW_HABITS = "NEW_HABITS";
 // Toggle menu on habit card
 export const TOGGLE_DAY_MENU = "TOGGLE_DAY_MENU";
 
-//Marked date Done
-export const MARK_DATE_DONE = "MARK_DATE_DONE";
-
-//Mark date Fail
-export const MARK_DATE_FAIL = "MARK_DATE_FAIL";
-
-//Mark date SKIP
-export const MARK_DATE_SKIP = "MARK_DATE_SKIP";
-
-//Mark date Fail
-export const MARK_DATE_DELETE = "MARK_DATE_DELETE";
+// Toggle Insider menu on habit card
+export const TOGGLE_INSIDER_DAY_MENU = "TOGGLE_INSIDER_DAY_MENU";
 
 //Habit value to Habit Insider
 export const HABIT_INSIDER_VALUE = "HABIT_INSIDER_VALUE";

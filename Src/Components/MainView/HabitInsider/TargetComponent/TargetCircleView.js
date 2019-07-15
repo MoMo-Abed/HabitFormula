@@ -70,7 +70,7 @@ export class TargetCircleView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#282729";
       case "candy":
         return "#F24236";
       case "blue":
@@ -89,7 +89,7 @@ export class TargetCircleView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "white";
       case "candy":
         return "#F24236";
       case "blue":
@@ -101,8 +101,25 @@ export class TargetCircleView extends Component {
     }
   }
 
+  ToggleContainerColor() {
+    let toggle = this.props.ChangeStyle;
+
+    switch (toggle) {
+      case "dark":
+        return "#363538";
+      case "candy":
+      case "blue":
+      case "pop":
+        return "white";
+
+      default:
+        return null;
+    }
+  }
+
   RenderElements() {
-    let { HabitTarget } = this.props;
+    let { HabitTarget, HabitInsider, Habits } = this.props;
+
     if (HabitTarget) {
       return (
         <Content scrollEnabled>
@@ -127,15 +144,16 @@ export class TargetCircleView extends Component {
 
               <View style={styles.ReText}>
                 <View style={{ flexDirection: "row" }}>
+                  {/** 
                   <Progress.Bar
                     borderRadius={0}
                     color={this.ToggleColor()}
                     borderColor={this.ToggleColor()}
-                    progress={0.0}
+                    progress={Habits[HabitInsider].HabitNumberOn / 21}
                     width={200}
-                    height={10}
+                    height={20}
                   />
-                  <Text>0%</Text>
+                  */}
                 </View>
                 <View>
                   <Text>{target.TargetTitle}</Text>
@@ -143,7 +161,7 @@ export class TargetCircleView extends Component {
               </View>
 
               <View style={styles.ReCirMenuView}>
-                <RewardsCirclePopMenu IconColor="black" />
+                <RewardsCirclePopMenu IconColor="white" />
               </View>
             </View>
           ))}
@@ -158,7 +176,7 @@ export class TargetCircleView extends Component {
       <MenuProvider>
         <Container
           style={{
-            backgroundColor: "white",
+            backgroundColor: this.ToggleContainerColor(),
             alignSelf: "center",
             width: "95%"
           }}
@@ -209,7 +227,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   ChangeStyle: state.HBMain.ChangeStyle,
-  HabitTarget: state.HBHabits.HabitTarget
+  HabitTarget: state.HBHabits.HabitTarget,
+  HabitInsider: state.HBHabits.HabitInsider,
+  Habits: state.HBHabits.Habits
 });
 
 const mapDispatchToProps = {};

@@ -23,7 +23,7 @@ export class FabBtnView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#238787";
       case "candy":
         return "#F24236";
       case "blue":

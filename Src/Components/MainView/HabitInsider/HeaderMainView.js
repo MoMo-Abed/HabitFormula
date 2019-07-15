@@ -30,7 +30,7 @@ export class HeaderMainView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#282729";
       case "candy":
         return "#F24236";
       case "blue":
@@ -49,7 +49,7 @@ export class HeaderMainView extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#282729";
       case "candy":
         return "#F24236";
       case "blue":
@@ -62,8 +62,9 @@ export class HeaderMainView extends Component {
   }
 
   render() {
+    let { HabitInsider, Habits } = this.props;
     return (
-      <Container style={{ backgroundColor: "#C3C3C7" }}>
+      <Container style={{ backgroundColor: this.ToggleHeaderColor() }}>
         <Header
           style={{ backgroundColor: this.ToggleHeaderColor() }}
           androidStatusBarColor={this.ToggleStatusColor()}
@@ -75,7 +76,7 @@ export class HeaderMainView extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>{this.props.HabitInsider.HabitName || ""}</Title>
+            <Title>{Habits[HabitInsider].HabitName || ""}</Title>
           </Body>
           <Right>
             <Button onPress={() => Actions.MainView()} transparent>
@@ -132,7 +133,8 @@ export class HeaderMainView extends Component {
 
 const mapStateToProps = state => ({
   ChangeStyle: state.HBMain.ChangeStyle,
-  HabitInsider: state.HBHabits.HabitInsider
+  HabitInsider: state.HBHabits.HabitInsider,
+  Habits: state.HBHabits.Habits
 });
 
 const mapDispatchToProps = {};

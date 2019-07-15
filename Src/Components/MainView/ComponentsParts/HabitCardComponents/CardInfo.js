@@ -84,7 +84,7 @@ export class CardInfo extends Component {
               </Label>
               <View>
                 <Progress.Circle
-                  progress={0.1}
+                  progress={this.props.CircleProgressValue}
                   size={150}
                   thickness={10}
                   showsText
@@ -108,7 +108,9 @@ export class CardInfo extends Component {
                 }}
               >
                 <Text style={{ color: this.ToggleColor() }}>Target Days:</Text>
-                <Text style={{ color: this.ToggleColor() }}>0/21 days</Text>
+                <Text style={{ color: this.ToggleColor() }}>
+                  {this.props.TargetDaysValue}
+                </Text>
               </View>
             </View>
           </View>

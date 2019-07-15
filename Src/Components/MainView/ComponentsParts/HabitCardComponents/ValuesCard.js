@@ -40,7 +40,9 @@ export class ValuesCard extends Component {
             color={this.ToggleColor()}
             size={12}
           />
-          <Text style={{ color: this.ToggleColor() }}>0</Text>
+          <Text style={{ color: this.ToggleColor() }}>
+            {this.props.DaysHabitOn}
+          </Text>
         </View>
         <View style={{ flexDirection: "row", marginLeft: 10 }}>
           <AntDesign
@@ -49,7 +51,9 @@ export class ValuesCard extends Component {
             color={this.ToggleColor()}
             size={12}
           />
-          <Text style={{ color: this.ToggleColor() }}>0/21</Text>
+          <Text style={{ color: this.ToggleColor() }}>
+            {this.props.CalHabitNum}
+          </Text>
         </View>
         <View style={{ marginLeft: 280 }}>
           <AntDesign

@@ -1,19 +1,15 @@
 import {
   DAYS_OFF,
   FLEXIBLE_SCH,
-  REPEATING_SCH,
   CHANGE_COLOR_DAYS_OFF,
   CREATE_HABIT,
   SHOW_HABIT_INSIDER_OVERLAY,
   CREATE_TARGET,
   TOGGLE_DAY_MENU,
   TOGGLE_CARD_INFO,
-  MARK_DATE_DONE,
-  MARK_DATE_DELETE,
-  MARK_DATE_FAIL,
-  MARK_DATE_SKIP,
   HABIT_INSIDER_VALUE,
-  NEW_HABITS
+  NEW_HABITS,
+  TOGGLE_INSIDER_DAY_MENU
 } from "../Action/types";
 
 const initialState = {
@@ -66,7 +62,8 @@ const initialState = {
         "2019-07-17": {
           Skip: true
         }
-      }
+      },
+      HabitNumberOn: 16
     }
   ],
 
@@ -80,52 +77,13 @@ const initialState = {
     }
   ],
 
-  HabitInsider: {
-    HabitName: "hello",
-    HabitDesc: "try5654546try",
-    Reason: {
-      Res1: "yyy",
-      Res2: "bbb",
-      Res3: "ghj"
-    },
-    Schedule: {
-      FixedDaysOffWeek: {
-        DaysOff: {
-          Su: false,
-          Mo: false,
-          Tu: false,
-          We: false,
-          Th: false,
-          Fr: false,
-          Sa: false
-        }
-      },
+  HabitInsider: 0,
 
-      FlexibleData: {
-        HabitNum: "3",
-        HMValue: "year"
-      },
-
-      RepeatingData: {
-        HbNum: "2"
-      },
-
-      HMT: {
-        Text: "2",
-        TimeValue: "times"
-      }
-    },
-
-    StartDate: "2019-07-09T22:00:00.000Z",
-    Archived: true,
-    MarkedDateState: null
-  },
-
-  MarkedDateState: {},
   big: {},
-
+  ToggleIsiderDayMenu: false,
   ChangeColorBorder: false,
-  ShowHabitInsiderOverLayRe: false
+  ShowHabitInsiderOverLayRe: false,
+  UpdateRe: false
 };
 let newDaysObject = {};
 
@@ -162,34 +120,6 @@ export default function(state = initialState, action) {
         Habits: [action.payload]
       };
 
-    case MARK_DATE_DONE:
-      return {
-        ...state,
-
-        MarkedDateState: { ...state.MarkedDateState, ...action.payload }
-      };
-
-    case MARK_DATE_FAIL:
-      return {
-        ...state,
-
-        MarkedDateState: { ...state.MarkedDateState, ...action.payload }
-      };
-
-    case MARK_DATE_SKIP:
-      return {
-        ...state,
-
-        MarkedDateState: { ...state.MarkedDateState, ...action.payload }
-      };
-
-    case MARK_DATE_DELETE:
-      return {
-        ...state,
-
-        MarkedDateState: { ...state.MarkedDateState, ...action.payload }
-      };
-
     case HABIT_INSIDER_VALUE:
       return {
         ...state,
@@ -200,6 +130,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         HabitMenuCard: true
+      };
+
+    case TOGGLE_INSIDER_DAY_MENU:
+      return {
+        ...state,
+        ToggleIsiderDayMenu: true
       };
 
     case TOGGLE_CARD_INFO:

@@ -31,7 +31,24 @@ export class Details extends Component {
 
     switch (toggle) {
       case "dark":
-        return "#0A090C";
+        return "#212022";
+      case "candy":
+        return "#C7372D";
+      case "blue":
+        return "#0E64A6";
+      case "pop":
+        return "#7044A9";
+      default:
+        return null;
+    }
+  }
+
+  ToggleFormColor() {
+    let toggle = this.props.ChangeStyle;
+
+    switch (toggle) {
+      case "dark":
+        return "#282729";
       case "candy":
         return "#F24236";
       case "blue":
@@ -43,18 +60,68 @@ export class Details extends Component {
     }
   }
 
+  ToggleFilledColor() {
+    let toggle = this.props.ChangeStyle;
+
+    switch (toggle) {
+      case "dark":
+      case "candy":
+      case "blue":
+      case "pop":
+        return "white";
+      default:
+        return null;
+    }
+  }
+
+  ToggleContainerColor() {
+    let toggle = this.props.ChangeStyle;
+
+    switch (toggle) {
+      case "dark":
+        return "#212022";
+      case "candy":
+      case "blue":
+      case "pop":
+        return "white";
+      default:
+        return null;
+    }
+  }
+
+  ToggleTextColor() {
+    let toggle = this.props.ChangeStyle;
+
+    switch (toggle) {
+      case "dark":
+      case "blue":
+      case "pop":
+        return "white";
+      case "candy":
+        return "black";
+      default:
+        return null;
+    }
+  }
+
   render() {
+    let { HabitInsider, Habits } = this.props;
+
     return (
-      <Container style={{ backgroundColor: "#C3C3C7", height: "100%" }}>
-        <Form style={styles.FormView}>
+      <Container
+        style={{ backgroundColor: this.ToggleContainerColor(), height: "100%" }}
+      >
+        <Form
+          style={[styles.FormView, { backgroundColor: this.ToggleFormColor() }]}
+        >
           <View>
             <Label style={styles.LabelSty}>Reasons</Label>
             <View>
               <Text style={styles.TextSty}>
-                {this.props.HabitInsider.Reason.Res1}
+                {Habits[HabitInsider].Reason.Res1}
               </Text>
               <Text style={styles.TextSty}>
-                {this.props.HabitInsider.Reason.Res2}
+                {Habits[HabitInsider].Reason.Res2}
               </Text>
             </View>
           </View>
@@ -67,14 +134,14 @@ export class Details extends Component {
           </View>
         </Form>
 
-        <Form style={styles.FormView}>
+        <Form
+          style={[styles.FormView, { backgroundColor: this.ToggleFormColor() }]}
+        >
           <View>
             <Label style={styles.LabelSty}>Start Date</Label>
             <View>
               <Text style={styles.TextSty}>
-                {moment(this.props.HabitInsider.StartDate).format(
-                  "DD MMMM YYYY"
-                )}
+                {moment(Habits[HabitInsider].StartDate).format("DD MMMM YYYY")}
               </Text>
             </View>
           </View>
@@ -82,34 +149,42 @@ export class Details extends Component {
           <View style={{ paddingBottom: 10 }}>
             <Label style={styles.LabelSty}>Progress</Label>
             <View>
+              {/** 
               <Progress.Circle
-                progress={0.1}
+                color={this.ToggleFilledColor()}
+                progress={Habits[HabitInsider].HabitNumberOn / 21}
                 size={150}
-                thickness={10}
                 showsText
+                thickness={8}
                 borderWidth={4}
                 borderColor={this.ToggleUnFilledColor()}
                 unfilledColor={this.ToggleUnFilledColor()}
                 indeterminate={false}
-                style={{ alignSelf: "center" }}
-                textStyle={{ color: "gray", fontWeight: "bold", fontSize: 50 }}
+                style={{ alignSelf: "center", color: "green" }}
               />
+              */}
             </View>
 
-            <View>
+            <View style={{ marginTop: 80 }}>
               <View style={{ flexDirection: "row" }}>
                 <Label style={styles.TextSty}>Target Days</Label>
-                <Text style={styles.TextSty}>:2/21 days</Text>
+                <Text style={styles.TextSty}>
+                  :{`${Habits[HabitInsider].HabitNumberOn} /21 days`}
+                </Text>
               </View>
 
               <View style={{ flexDirection: "row" }}>
                 <Label style={styles.TextSty}>Current Streak</Label>
-                <Text style={styles.TextSty}>:2 days</Text>
+                <Text style={styles.TextSty}>
+                  :{`${Habits[HabitInsider].HabitNumberOn} days`}
+                </Text>
               </View>
 
               <View style={{ flexDirection: "row" }}>
                 <Label style={styles.TextSty}>Longest Streak</Label>
-                <Text style={styles.TextSty}>:2 days</Text>
+                <Text style={styles.TextSty}>
+                  :{`${Habits[HabitInsider].HabitNumberOn} days`}
+                </Text>
               </View>
             </View>
           </View>
@@ -121,7 +196,6 @@ export class Details extends Component {
 
 const styles = StyleSheet.create({
   FormView: {
-    backgroundColor: "white",
     width: "95%",
     alignSelf: "center",
     marginTop: 10
@@ -130,13 +204,13 @@ const styles = StyleSheet.create({
     width: "95%"
   },
   LabelSty: {
-    color: "black",
+    color: "white",
     fontWeight: "500",
     marginLeft: 18,
     marginTop: 10
   },
   TextSty: {
-    color: "black",
+    color: "white",
     marginLeft: 18,
     marginTop: 10
   }
@@ -144,7 +218,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   ChangeStyle: state.HBMain.ChangeStyle,
-  HabitInsider: state.HBHabits.HabitInsider
+  HabitInsider: state.HBHabits.HabitInsider,
+  Habits: state.HBHabits.Habits
 });
 
 const mapDispatchToProps = {};

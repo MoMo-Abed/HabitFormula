@@ -19,6 +19,7 @@ import HeaderRightPopMenu from "./HeaderRightPopMenu";
 import { ToggleDrawer } from "../../../Redux/Action/MainActions";
 import RewardsSwipeView from "./Reward/RewardsSwipeView";
 import HabitsVMainView from "./HabitCardComponents/HabitsVMainView";
+import Charts_MainView from "./Charts/Charts_MainView";
 export class HeaderMainView extends Component {
   static propTypes = {
     ChangStyle: PropTypes.string.isRequired,
@@ -138,7 +139,7 @@ export class HeaderMainView extends Component {
             activeTabStyle={{ backgroundColor: this.ToggleHeaderColor() }}
             heading="Graphs"
           >
-            <Text>gg</Text>
+            <Charts_MainView />
           </Tab>
         </Tabs>
       </Container>

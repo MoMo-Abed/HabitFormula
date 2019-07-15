@@ -20,14 +20,16 @@ export class InsiderMainView extends Component {
 
   render() {
     return (
-      <Container style={{ backgroundColor: "#C3C3C7" }}>
+      <Container>
         <HeaderMainView />
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  ChangeStyle: state.HBMain.ChangeStyle
+});
 
 const mapDispatchToProps = {};
 

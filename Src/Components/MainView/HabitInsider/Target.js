@@ -24,9 +24,25 @@ export class Target extends Component {
     prop: PropTypes
   };
 
+  ToggleContainerColor() {
+    let toggle = this.props.ChangeStyle;
+
+    switch (toggle) {
+      case "dark":
+        return "#363538";
+      case "candy":
+      case "blue":
+      case "pop":
+        return "white";
+
+      default:
+        return null;
+    }
+  }
+
   render() {
     return (
-      <Container style={{ backgroundColor: "#C3C3C7", height: "100%" }}>
+      <Container style={{ backgroundColor: this.ToggleContainerColor() }}>
         <TargetCircleView />
         <OverlayRewardsMenu />
 
@@ -36,7 +52,9 @@ export class Target extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  ChangeStyle: state.HBMain.ChangeStyle
+});
 
 const mapDispatchToProps = {};
 

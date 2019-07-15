@@ -8,12 +8,9 @@ import {
   CREATE_TARGET,
   TOGGLE_DAY_MENU,
   TOGGLE_CARD_INFO,
-  MARK_DATE_DONE,
-  MARK_DATE_DELETE,
-  MARK_DATE_FAIL,
-  MARK_DATE_SKIP,
   HABIT_INSIDER_VALUE,
-  NEW_HABITS
+  NEW_HABITS,
+  TOGGLE_INSIDER_DAY_MENU
 } from "./types";
 
 export function CreateHabit(state) {
@@ -30,34 +27,6 @@ export function UpdateHabits(state) {
   };
 }
 
-export function MarkDateDone(state) {
-  return {
-    type: MARK_DATE_DONE,
-    payload: state
-  };
-}
-
-export function MarkDateFail(state) {
-  return {
-    type: MARK_DATE_FAIL,
-    payload: state
-  };
-}
-
-export function MarkDateSkip(state) {
-  return {
-    type: MARK_DATE_SKIP,
-    payload: state
-  };
-}
-
-export function MarkDateDelete(state) {
-  return {
-    type: MARK_DATE_DELETE,
-    payload: state
-  };
-}
-
 export function Habit_InsiderValue(state) {
   return {
     type: HABIT_INSIDER_VALUE,
@@ -68,6 +37,12 @@ export function Habit_InsiderValue(state) {
 export function ToggleMenuCard() {
   return {
     type: TOGGLE_DAY_MENU
+  };
+}
+
+export function ToggleinsiderMenu() {
+  return {
+    type: TOGGLE_INSIDER_DAY_MENU
   };
 }
 

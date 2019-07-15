@@ -122,16 +122,20 @@ export class HabitsVMainView extends Component {
       ...{ [_selectedDay]: { Done: true } }
     };
 
-    let recipesCopy = JSON.parse(JSON.stringify(this.state.Habits));
+    let HabitsCopy = JSON.parse(JSON.stringify(this.state.Habits));
     //make changes to ingredients
-    recipesCopy[ObjectIndex].MarkedDateState = {
-      ...recipesCopy[ObjectIndex].MarkedDateState,
+    HabitsCopy[ObjectIndex].MarkedDateState = {
+      ...HabitsCopy[ObjectIndex].MarkedDateState,
       ...updatedMarkedDates
-    }; //whatever new ingredients are
+    }; //whatever new inegredints are
+
+    HabitsCopy[ObjectIndex].HabitNumberOn =
+      HabitsCopy[ObjectIndex].HabitNumberOn + 1;
+
     this.setState({
-      Habits: recipesCopy
+      Habits: HabitsCopy
     });
-    this.props.UpdateHabits(recipesCopy);
+    this.props.UpdateHabits(HabitsCopy);
   }
 
   onFailPressed() {
@@ -140,16 +144,17 @@ export class HabitsVMainView extends Component {
       ...{ [_selectedDay]: { Fail: true } }
     };
 
-    let recipesCopy = JSON.parse(JSON.stringify(this.state.Habits));
+    let HabitsCopy = JSON.parse(JSON.stringify(this.state.Habits));
     //make changes to ingredients
-    recipesCopy[ObjectIndex].MarkedDateState = {
-      ...recipesCopy[ObjectIndex].MarkedDateState,
+    HabitsCopy[ObjectIndex].MarkedDateState = {
+      ...HabitsCopy[ObjectIndex].MarkedDateState,
       ...updatedMarkedDates
-    }; //whatever new ingredients are
+    }; //whatever new inegredints are
+
     this.setState({
-      Habits: recipesCopy
+      Habits: HabitsCopy
     });
-    this.props.UpdateHabits(recipesCopy);
+    this.props.UpdateHabits(HabitsCopy);
   }
 
   onSkipPressed() {
@@ -158,16 +163,20 @@ export class HabitsVMainView extends Component {
       ...{ [_selectedDay]: { Skip: true } }
     };
 
-    let recipesCopy = JSON.parse(JSON.stringify(this.state.Habits));
+    let HabitsCopy = JSON.parse(JSON.stringify(this.state.Habits));
     //make changes to ingredients
-    recipesCopy[ObjectIndex].MarkedDateState = {
-      ...recipesCopy[ObjectIndex].MarkedDateState,
+    HabitsCopy[ObjectIndex].MarkedDateState = {
+      ...HabitsCopy[ObjectIndex].MarkedDateState,
       ...updatedMarkedDates
-    }; //whatever new ingredients are
+    }; //whatever new inegredints are
+
+    HabitsCopy[ObjectIndex].HabitNumberOn =
+      HabitsCopy[ObjectIndex].HabitNumberOn + 1;
+
     this.setState({
-      Habits: recipesCopy
+      Habits: HabitsCopy
     });
-    this.props.UpdateHabits(recipesCopy);
+    this.props.UpdateHabits(HabitsCopy);
   }
 
   RenderHabits() {
@@ -179,7 +188,7 @@ export class HabitsVMainView extends Component {
             <TouchableHighlight
               style={{ marginTop: 20 }}
               onPress={() => {
-                this.props.Habit_InsiderValue(habit), Actions.HabitInsider();
+                this.props.Habit_InsiderValue(index), Actions.HabitInsider();
               }}
             >
               <View style={{ backgroundColor: this.ToggleViewColor() }}>
@@ -228,8 +237,14 @@ export class HabitsVMainView extends Component {
                   OnSkipPress={() => this.onSkipPressed()}
                   OnDeletePress
                 />
-                <ValuesCard />
-                <CardInfo />
+                <ValuesCard
+                  CalHabitNum={`${habit.HabitNumberOn}/21 `}
+                  DaysHabitOn={habit.HabitNumberOn}
+                />
+                <CardInfo
+                  TargetDaysValue={`${habit.HabitNumberOn}/21 days`}
+                  CircleProgressValue={habit.HabitNumberOn / 21}
+                />
               </View>
             </TouchableHighlight>
           ))}
@@ -288,10 +303,7 @@ export default connect(
   mapStateToProps,
   {
     ToggleMenuCard,
-    MarkDateDone,
-    MarkDateDelete,
-    MarkDateFail,
-    MarkDateSkip,
+
     Habit_InsiderValue,
     UpdateHabits
   }
